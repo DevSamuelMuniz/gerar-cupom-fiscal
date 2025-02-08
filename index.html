@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cupom Fiscal</title>
+    <title>UNIR - Cupom Fiscal</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+
     <style>
       * {
         margin: 0;
@@ -126,6 +130,15 @@
         display: flex;
       }
 
+      .ctn-unir{
+        position: absolute;
+        top: 2rem;
+      }
+
+      .unir-logo{
+        width: 8rem;
+      }
+
       /* Estilos para impressão */
       @media print {
         body {
@@ -155,6 +168,11 @@
     </style>
   </head>
   <body class="paddindT">
+
+    <div class="ctn-unir">
+      <img src="unir.png" class="unir-logo" alt="">
+    </div>
+
     <div class="container no-print">
       <h2>Gerar Cupom Fiscal</h2>
       <form id="cupomForm">
