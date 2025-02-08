@@ -106,13 +106,18 @@
       .cupom-container hr {
         border: none;
         border-top: 1px dashed #333;
-        margin: 10px 0;
       }
 
       /* Logo */
       .logo {
-        width: 60px;
+        width: 6rem;
         margin: 0 auto 10px;
+      }
+
+      .ctn-logo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .paddindT {
@@ -175,10 +180,14 @@
     </div>
 
     <div id="cupom" class="cupom-container">
-      <p><strong>Mary Confecções</strong></p>
-      <p>Rua Silvestre Agostinho Sales</p>
-      <p>Jardim Jordão - Jaboatão dos Guararapes - PE</p>
-      <p>Fone: (81) 98756-5633</p>
+      <div class="ctn-logo">
+        <img src="logo.jpeg" class="logo" alt="" />
+      </div>
+      <p><strong>PAULO ALBERTO A SILVA MEI</strong></p>
+      <p>Rua Jean Emile Favre, 1209</p>
+      <p>IPSEP - Recife - Pernambuco</p>
+      <p>CEP: 51.190-450</p>
+      <p>CNPJ: 47.750.086/0001-33</p>
       <hr />
       <p><strong>Data:</strong> <span id="cupomData"></span></p>
       <p><strong>Número:</strong> <span id="cupomNumero"></span></p>
@@ -266,12 +275,18 @@
         document.getElementById("cupomNumero").textContent = "004877"; // Número do cupom
 
         // Resetando o total do cupom
-        totalCompra = produtos.reduce((acc, produto) => acc + parseFloat(produto.total), 0);
+        totalCompra = produtos.reduce(
+          (acc, produto) => acc + parseFloat(produto.total),
+          0
+        );
 
-        document.getElementById("cupomTotalVenda").textContent = totalCompra.toFixed(2);
+        document.getElementById("cupomTotalVenda").textContent =
+          totalCompra.toFixed(2);
         document.getElementById("cupomDesconto").textContent = "0.00";
-        document.getElementById("cupomLiquido").textContent = totalCompra.toFixed(2);
-        document.getElementById("cupomPago").textContent = totalCompra.toFixed(2);
+        document.getElementById("cupomLiquido").textContent =
+          totalCompra.toFixed(2);
+        document.getElementById("cupomPago").textContent =
+          totalCompra.toFixed(2);
         document.getElementById("cupomTroco").textContent = "0.00";
 
         document.getElementById("cupom").style.display = "block";
