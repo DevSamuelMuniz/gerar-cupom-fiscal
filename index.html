@@ -215,6 +215,7 @@
 
     <script>
       let produtos = [];
+      let contadorProdutos = 0; // Variável para contagem de produtos
 
       function adicionarProduto() {
         const produto = document.getElementById("produto").value;
@@ -223,18 +224,22 @@
         const total = (quantidade * preco).toFixed(2);
 
         if (produto && quantidade > 0 && preco > 0) {
+          contadorProdutos++; // Incrementa a contagem de produtos
           produtos.push({ produto, quantidade, preco, total });
 
           // Exibindo o preview do produto na área do cupom
           const produtoDiv = document.createElement("div");
           produtoDiv.innerHTML = `
-            <p><strong>${produto}</strong></p>
+            <p><strong>Produto ${contadorProdutos}:</strong> ${produto}</p>
             <p>Qtd: ${quantidade}</p>
             <p>Preço: R$ ${parseFloat(preco).toFixed(2)}</p>
             <p>Total: R$ ${total}</p>
             <hr />
           `;
           document.getElementById("cupomProdutos").appendChild(produtoDiv);
+
+          // Exibe a contagem de produtos no preview
+          document.getElementById("cupomNumero").textContent = contadorProdutos;
 
           document.getElementById("produto").value = "";
           document.getElementById("quantidade").value = "";
@@ -260,32 +265,14 @@
         document.getElementById("cupomData").textContent = data;
         document.getElementById("cupomNumero").textContent = "004877"; // Número do cupom
 
-        // Resetando o conteúdo do cupom antes de atualizar
-        const cupomProdutosContainer = document.getElementById("cupomProdutos");
-        cupomProdutosContainer.innerHTML = "";
+        // Resetando o total do cupom
+        totalCompra = produtos.reduce((acc, produto) => acc + parseFloat(produto.total), 0);
 
-        produtos.forEach(({ produto, quantidade, preco, total }) => {
-          totalCompra += parseFloat(total);
-
-          const produtoDiv = document.createElement("div");
-          produtoDiv.innerHTML = `
-            <p><strong>${produto}</strong></p>
-            <p>Qtd: ${quantidade}</p>
-            <p>Preço: R$ ${parseFloat(preco).toFixed(2)}</p>
-            <p>Total: R$ ${total}</p>
-            <hr />
-          `;
-          cupomProdutosContainer.appendChild(produtoDiv);
-        });
-
-        document.getElementById("cupomTotalVenda").textContent =
-          totalCompra.toFixed(2);
-        document.getElementById("cupomDesconto").textContent = "0,00";
-        document.getElementById("cupomLiquido").textContent =
-          totalCompra.toFixed(2);
-        document.getElementById("cupomPago").textContent =
-          totalCompra.toFixed(2);
-        document.getElementById("cupomTroco").textContent = "0,00";
+        document.getElementById("cupomTotalVenda").textContent = totalCompra.toFixed(2);
+        document.getElementById("cupomDesconto").textContent = "0.00";
+        document.getElementById("cupomLiquido").textContent = totalCompra.toFixed(2);
+        document.getElementById("cupomPago").textContent = totalCompra.toFixed(2);
+        document.getElementById("cupomTroco").textContent = "0.00";
 
         document.getElementById("cupom").style.display = "block";
       }
